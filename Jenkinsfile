@@ -21,13 +21,16 @@ pipeline {
         }
 
         stage('Deploy') {
-            steps {
-                sh '''
-                pkill node || true
-                nohup node app.js > app.log 2>&1 &
-                '''
-            }
-        }
+    steps {
+        sh '''
+        cd $WORKSPACE
+        npm install
+        pkill -f node || true
+        nohup node app.js > app.log 2>&1 &
+        '''
+    }
+}
+
     }
 }
 
